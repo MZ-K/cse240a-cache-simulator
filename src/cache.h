@@ -62,6 +62,9 @@ extern uint64_t l2cacheRefs;      // L2$ references
 extern uint64_t l2cacheMisses;    // L2$ misses
 extern uint64_t l2cachePenalties; // L2$ penalties
 
+
+enum CacheType { I, D, L2 };
+
 //------------------------------------//
 //      Cache Function Prototypes     //
 //------------------------------------//
@@ -83,6 +86,6 @@ uint32_t dcache_access(uint32_t addr);
 // Perform a memory access to the l2cache for the address 'addr'
 // Return the access time for the memory operation
 //
-uint32_t l2cache_access(uint32_t addr);
+uint32_t l2cache_access(uint32_t addr, enum CacheType l1cacheType);
 
 #endif
