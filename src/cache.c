@@ -382,12 +382,12 @@ l2cache_access(uint32_t addr, enum CacheType l1cacheType)
 
   for (j = 0; j < l2cacheAssoc; ++j) {
     if ((l2cache[idx][j].valid == FALSE) || (l2cache[idx][j].LRUbit == 0)) {
-      if (inclusive==TRUE && l2cache[idx][j].valid == TRUE) {
-        if (l1cacheType == I)
-          evictIcache(l2cache[idx][j].tag, idx);
-        if (l1cacheType == D)
-          evictDcache(l2cache[idx][j].tag, idx);
-      }
+      // if (inclusive==TRUE && l2cache[idx][j].valid == TRUE) {
+      //   if (l1cacheType == I)
+      //     evictIcache(l2cache[idx][j].tag, idx);
+      //   if (l1cacheType == D)
+      //     evictDcache(l2cache[idx][j].tag, idx);
+      // }
       l2cache[idx][j].valid = TRUE;
       l2cache[idx][j].tag = tag;
       l2cache[idx][j].LRUbit = 0;
