@@ -271,7 +271,7 @@ icache_access(uint32_t addr)
 
   if (!icacheSets) {
     icachePenalties += l2cacheHitTime;
-    return (icacheHitTime + l2cache_access(addr, I));
+    return (l2cache_access(addr, I));
   }
 
   ++icacheRefs;
@@ -314,7 +314,7 @@ dcache_access(uint32_t addr)
 
   if (!dcacheSets) {
     dcachePenalties += l2cacheHitTime;
-    return (dcacheHitTime + l2cache_access(addr, D));
+    return (l2cache_access(addr, D));
   }
 
   ++dcacheRefs;
@@ -363,7 +363,7 @@ l2cache_access(uint32_t addr, enum CacheType l1cacheType)
       dcachePenalties += memspeed;
     }
     l2cachePenalties += memspeed;
-    return (l2cacheHitTime + memspeed);
+    return (memspeed);
   }
     
 
