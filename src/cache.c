@@ -271,7 +271,7 @@ icache_access(uint32_t addr)
 
   if (!icacheSets) {
     icachePenalties += l2cacheHitTime;
-    return l2cache_access(addr, I);
+    return (icacheHitTime + l2cache_access(addr, I));
   }
 
   ++icacheRefs;
@@ -299,7 +299,7 @@ icache_access(uint32_t addr)
   }
 
   icachePenalties += l2cacheHitTime;
-  return l2cache_access(addr, I);
+  return (icacheHitTime + l2cache_access(addr, I));
 }
 
 // Perform a memory access through the dcache interface for the address 'addr'
@@ -314,7 +314,7 @@ dcache_access(uint32_t addr)
 
   if (!dcacheSets) {
     dcachePenalties += l2cacheHitTime;
-    return l2cache_access(addr, D);
+    return (dcacheHitTime + l2cache_access(addr, I));
   }
 
   ++dcacheRefs;
@@ -342,7 +342,7 @@ dcache_access(uint32_t addr)
   }
 
   dcachePenalties += l2cacheHitTime;
-  return l2cache_access(addr, D);
+  return (dcacheHitTime + l2cache_access(addr, I));
 }
 
 // Perform a memory access to the l2cache for the address 'addr'
@@ -363,7 +363,7 @@ l2cache_access(uint32_t addr, enum CacheType l1cacheType)
       dcachePenalties += memspeed;
     }
     l2cachePenalties += memspeed;
-    return memspeed;
+    return (l2cacheHitTime + memspeed);
   }
     
 
@@ -404,5 +404,5 @@ l2cache_access(uint32_t addr, enum CacheType l1cacheType)
     dcachePenalties += memspeed;
   }
   l2cachePenalties += memspeed;
-  return memspeed;
+  return (l2cacheHitTime + memspeed);
 }
