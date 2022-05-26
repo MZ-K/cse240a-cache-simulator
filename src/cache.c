@@ -238,7 +238,7 @@ updateLRUbits(enum CacheType cacheType, uint32_t setIdx, uint32_t accessIdx) {
       break;
     case L2:
       cache = l2cache;
-      cacheAssoc = dcacheAssoc;
+      cacheAssoc = l2cacheAssoc;
       break;
     default:
       printf("Warning: Undefined Cache Type!\n");
